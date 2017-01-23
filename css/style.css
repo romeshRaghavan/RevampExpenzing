@@ -1052,9 +1052,10 @@ li.com a:hover{
     color: #fff;
     line-height: 54px;
     font-size: 25px;
-    background: #0675a2;
+    /* background: #0675a2; */
     border: 1px solid rgba(221, 221, 221, 0.8);
     font-weight: 400;
+    background: #0675a2 url(../images/ar-n.png) no-repeat right; 
     
 }
 .ac-containermarker{
