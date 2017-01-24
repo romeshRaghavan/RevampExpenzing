@@ -2853,10 +2853,7 @@ padding-top:6px
 	line-height:1.5;
 	border-radius:3px
 }
-.btn-block {
-	display:block;
-	width:100%
-}
+
 .btn-block+.btn-block {
 	margin-top:25px
 }
