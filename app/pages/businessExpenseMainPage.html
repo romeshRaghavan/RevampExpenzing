@@ -14,7 +14,7 @@
           <div class="col-lg-12 clearfix addanexpense">
             <h1>Add Business Expense</h1>
             <div class="expenseform clearfix" data-role="page" id="page1">
-              <ul style="padding-left: 32px;padding-right: 32px;">
+              <ul style="padding-left: 25px;padding-right: 25px;">
                 <li>
                   <div role="main" class="ui-content">
                     <input id="expDate" type="text" class="span2 dp1" placeholder="Date" readonly="readonly">
@@ -78,6 +78,9 @@
 		 currentMonth = date.getMonth();
 		 currentDate = date.getDate();
 		 currentYear = date.getFullYear();
+        $("#expDate").datepicker({
+		maxDate: new Date(currentYear, currentMonth, currentDate)
+		});
 
 	});
 	currentMonth = currentMonth+1;
@@ -103,9 +106,6 @@
 	}
 </script>
         </div>
-		<div style="display:none" id="loading_Cat" >
-               <img src="images/loading2.gif" id="loading-image_Cat" alt="Loading..." >
-		</div>
 
       <div id="openModal" class="modalDialog" style="display:none;">
 	    <div>
@@ -137,7 +137,7 @@
                   <input id="empAdvAccHead" type="hidden" style="width: 98%">
                 </li>
            <li>
-               <textarea  id="empAdvjustification"  rows="4" cols="42.5" placeholder="Justification" style="width: 98%"></textarea>
+               <input type="textarea"  id="empAdvjustification" style="width: 98% height:10%"  rows="4" cols="42.5" placeholder="Justification" style="width: 98%">
            </li>
 				
         <li>
@@ -157,9 +157,6 @@
             </div>
           </div>
         </div>
-        <div  style="display:none" id="loading_Cat" >
-               <img src="images/loading2.gif" id="loading-image_Cat" alt="Loading..." >
-		</div>
       </div>
       
 	 <script>
@@ -258,9 +255,7 @@
          <button class="btn btn-primary btn-lg btn-block" style="width :70%" onclick="submitBEWithEA();"><font size="3.5">Send for Approval</font></button>
           </div>
 </div>
-      <div  style="display:none" id="loading_Cat" >
-               <img src="images/loading2.gif" id="loading-image_Cat" alt="Loading..." >
-		     </div>
+                            
 </div>
 
 
@@ -281,4 +276,7 @@
 				     </script>	
         </div>			
     </div>
+              <div  style="display:none" id="loading_Cat" >
+               <img src="images/loading2.gif" id="loading-image_Cat" alt="Loading..." >
+		     </div>
 </div>
