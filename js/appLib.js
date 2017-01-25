@@ -1865,3 +1865,12 @@ function deleteSelectedEmplAdv(employeeAdvDetailId){
 			});
 	  }
 
+ function showSyncMaster(){
+		var headerBackBtn=defaultPagePath+'backbtnPage.html';
+     var pageRef=defaultPagePath+'syncMaster.html';
+			j(document).ready(function() {
+				j('#mainHeader').load(headerBackBtn);
+				j('#mainContainer').load(pageRef);
+			});
+   appPageHistory.push(pageRef);
+	}
