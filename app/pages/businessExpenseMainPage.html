@@ -1,9 +1,9 @@
 <div class="deals">
     <div class="sap_tabs">	
-         <div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
+         <div id="horizontalTab" style="style= display: block;width: 100%;margin: 0px;padding-top: 10px;">
                <ul class="resp-tabs-list">
-				 <li class="resp-tab-item resp-tab-active" aria-controls="tab_item-0" role="tab" > Bussiness Expense</li>
-                 <li class="resp-tab-item resp-tab-active" aria-controls="tab_item-1" role="tab" > Employee Advance</li>
+				 <li class="resp-tab-item resp-tab-active" aria-controls="tab_item-0" role="tab" onclick ="addHeader();"> Business Expense</li>
+                 <li class="resp-tab-item resp-tab-active" aria-controls="tab_item-1" role="tab" onclick ="addHeader();"> Employee Advance</li>
 				 <li class="resp-tab-item resp-tab-active" aria-controls="tab_item-2" role="tab" > sync</li>
                 </ul>				  	 
 				<div class="resp-tabs-container">
@@ -78,9 +78,6 @@
 		 currentMonth = date.getMonth();
 		 currentDate = date.getDate();
 		 currentYear = date.getFullYear();
-        $("#expDate").datepicker({
-		maxDate: new Date(currentYear, currentMonth, currentDate)
-		});
 
 	});
 	currentMonth = currentMonth+1;
@@ -191,7 +188,7 @@
 	<div id="helpimage" class="Row">
      <div class="Cell" >
 		<font face="verdana" size="1" color="green" style=" font-size: small;color: navy;"></font>
-		<img src="images/Employee_advance_part1.png" style="height: 80%;width: 95%;">
+		<img src="images/Employee_advance_part1.png" style="height: 80%;width: 95%;text-align: -webkit-center;">
 		</div>
 	</div>
 <div id = "BE" class="modal-body clearfix">

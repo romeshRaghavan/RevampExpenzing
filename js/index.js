@@ -2844,3 +2844,12 @@ function openNav() {
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
 }
+
+
+ function addHeader(){		 
+      var headerBackBtn=defaultPagePath+'backbtnPage.html';
+			j(document).ready(function() {
+				j('#mainHeader').load(headerBackBtn);
+			});
+      appPageHistory.push(pageRef);
+	 }

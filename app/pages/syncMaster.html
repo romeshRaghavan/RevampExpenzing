@@ -1,0 +1,19 @@
+<div style="background-color: white;padding-left: 12px;height: 500px;">
+<HR>
+<H1>Sync Master</H1>
+</HR>
+       <section>
+           <li><a style="padding-left: 20px;color: black;" onclick="synchronizeBEMasterData()">Sync Business Expense Master</a></li>
+    </section><br>
+       <section id="EaDisplayID">
+        <li><a style="padding-left: 20px;" onclick="synchronizeEAMasterData()"><font color = "black">Pull Employee Advance</font></a></li>
+        </section>
+      <section id="TrRoleID" style="font-weight: 400;padding: 3px 20px;line-height: 1.78777143;text-align: left;white-space: nowrap;">
+			  <li ><a  style="color: #333;" onclick="synchronizeTRMasterData();">Sync Travel Master</a></li>
+			  <li ><a  style="color: #333;" onclick="synchronizeTRForTS();">Pull Travel Request to Settle</a></li>
+			  </section>
+          <div  style="display:none" id="syncSuccessMsg" class="displaysynctext">       
+        </div>
+     <div  style="display:none" id="syncFailureMsg" class="displaysynctext">          
+     </div>
+</div>

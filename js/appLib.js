@@ -430,22 +430,22 @@ function fetchExpenseClaim() {
 				{
 					if(row.expFromLoc != '' && row.expToLoc != '')
 					{
-						j('<td></td>').attr({ class: ["expNarration"].join(' ') }).html('<p>'+shrinkNarration+'</br>'+srinckFromTo+ '</P>').appendTo(rowss);
+						j('<td></td>').attr({ class: ["expNarration"].join(' ') }).html('<p style="color: black;">'+shrinkNarration+'</br>'+srinckFromTo+ '</P>').appendTo(rowss);
 					}
 					else
 					{
-						j('<td></td>').attr({ class: ["expNarration"].join(' ') }).html('<p>'+row.expNarration+'</br>'+row.expFromLoc+""+row.expToLoc+ '</P>').appendTo(rowss);
+						j('<td></td>').attr({ class: ["expNarration"].join(' ') }).html('<p style="color: black;">'+row.expNarration+'</br>'+row.expFromLoc+""+row.expToLoc+ '</P>').appendTo(rowss);
 					}
 				}
 				else
 				{
-					j('<td></td>').attr({ class: ["expNarration"].join(' ') }).html('<p>'+row.expNarration+'</br>'+row.expFromLoc+"/"+row.expToLoc+ '</P>').appendTo(rowss);
+					j('<td></td>').attr({ class: ["expNarration"].join(' ') }).html('<p style="color: black;">'+row.expNarration+'</br>'+row.expFromLoc+"/"+row.expToLoc+ '</P>').appendTo(rowss);
 				}
 				
 				if(row.busExpAttachment.length == 0){
-				j('<td></td>').attr({ class: ["expAmt"].join(' ') }).html('<p>'+row.expAmt+' '+row.currencyName+'</P>').appendTo(rowss); 	
+				j('<td></td>').attr({ class: ["expAmt"].join(' ') }).html('<p style="color: black;">'+row.expAmt+' '+row.currencyName+'</P>').appendTo(rowss); 	
 				}else{
-				j('<td></td>').attr({ class: ["expAmt"].join(' ') }).html('<p>'+row.expAmt+' '+row.currencyName+'</P><img src="images/attach.png" width="25px" height="25px">').appendTo(rowss); 
+				j('<td></td>').attr({ class: ["expAmt"].join(' ') }).html('<p style="color: black;">'+row.expAmt+' '+row.currencyName+'</P><img src="images/attach.png" width="25px" height="25px">').appendTo(rowss); 
 				}
 				j('<td></td>').attr({ class: ["expDate1","displayNone"].join(' ') }).text(row.expDate).appendTo(rowss);
 				j('<td></td>').attr({ class: ["expFromLoc1","displayNone"].join(' ') }).text(row.expFromLoc).appendTo(rowss);
