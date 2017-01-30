@@ -2,7 +2,7 @@ var j = jQuery.noConflict();
 var defaultPagePath='app/pages/';
 var headerMsg = "Expenzing";
 var urlPath;
-var WebServicePath = 'http://1.255.255.214:8085/NexstepWebService/mobileLinkResolver.service';
+var WebServicePath ='http://1.255.255.214:8085/NexstepWebService/mobileLinkResolver.service';
 var clickedFlagCar = false;
 var clickedFlagTicket = false;
 var clickedFlagHotel = false;
@@ -147,19 +147,6 @@ function commanLogin(){
 			});
       appPageHistory.push(pageRef);
 	 }
-
-  function createBusiExpMain(){
-	resetImageData();
-	var headerBackBtn=defaultPagePath+'backbtnPage.html';
-    var pageRef=defaultPagePath+'businessExpenseMainPage.html';
-			j(document).ready(function() {
-				j('#mainHeader').load(headerBackBtn);
-				j('#mainContainer').load(pageRef);
-			});
-      appPageHistory.push(pageRef);
-	 }
-
-
 
 	 function displayBusinessExp(){
 		 
@@ -2851,5 +2838,40 @@ function closeNav() {
 			j(document).ready(function() {
 				j('#mainHeader').load(headerBackBtn);
 			});
+	 }
+
+
+function fetchBusiEmpAdv(){
+	if(window.localStorage.getItem("EaInMobile") == "true"){
+        fetchBusinessExpNdEmployeeAdv();
+        document.getElementById('helpimage').style.display="";
+		//document.getElementById('EA').style.display="";
+	}else{
+        fetchExpenseClaimFromMain();
+        document.getElementById('helpimage').style.display="none";
+		document.getElementById('EA').style.display="none";
+	}
+}
+
+  function createBusiExpMain(){
+	resetImageData();
+	var headerBackBtn=defaultPagePath+'backbtnPage.html';
+    var pageRef=defaultPagePath+'businessExpenseMainPage.html';
+			j(document).ready(function() {
+				j('#mainHeader').load(headerBackBtn);
+				j('#mainContainer').load(pageRef);
+			});
       appPageHistory.push(pageRef);
 	 }
+
+  function createTravelMain(){
+	resetImageData();
+	var headerBackBtn=defaultPagePath+'backbtnPage.html';
+    var pageRef=defaultPagePath+'travelMainPage.html';
+			j(document).ready(function() {
+				j('#mainHeader').load(headerBackBtn);
+				j('#mainContainer').load(pageRef);
+			});
+      appPageHistory.push(pageRef);
+	 }
+

@@ -4,7 +4,7 @@
                <ul class="resp-tabs-list">
 				 <li class="resp-tab-item resp-tab-active" aria-controls="tab_item-0" role="tab" onclick ="addHeader();"> Business Expense</li>
                  <li class="resp-tab-item resp-tab-active" aria-controls="tab_item-1" role="tab" onclick ="addHeader();"> Employee Advance</li>
-				 <li class="resp-tab-item resp-tab-active" aria-controls="tab_item-2" role="tab" > sync</li>
+				 <li class="resp-tab-item resp-tab-active" aria-controls="tab_item-2" role="tab" onclick ="fetchBusiEmpAdv();" > sync</li>
                 </ul>				  	 
 				<div class="resp-tabs-container">
                     
@@ -254,11 +254,10 @@
 </div>
                             
 </div>
+  <script>
+     fetchBusiEmpAdv();
+    </script>
 
-
-<script>
-    hideEmployeeAdvance();
-                        </script>
                     </div>
                  </div>
                       <script src="js/easyResponsiveTabs.js" type="text/javascript"></script>
