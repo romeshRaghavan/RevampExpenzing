@@ -535,7 +535,7 @@
 }
 
 a {
-	color:#337ab7;
+	color:#000000;
 	text-decoration:none
 }
 a:focus, a:hover {
@@ -700,7 +700,7 @@ body {
 .sidenav .closebtn {
     position: absolute;
     top: 30px;
-    right: 25px;
+    right: 0px;
     font-size: 45px;
     margin-left: 50px;
 }

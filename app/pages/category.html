@@ -1,16 +1,10 @@
  <script>
- 	//hideTRIcons();
+ 	hideTRIcons();
     //hideEAIcons();
  </script>
 
 <body style="padding:0px; margin:0px; background-color:#fff;font-family:'Open Sans',sans-serif,arial,helvetica,verdana">
 
-    <!-- #region Jssor Slider Begin -->
-    <!-- Generator: Jssor Slider Maker -->
-    <!-- Source: http://www.jssor.com -->
-    <!-- This code works with jquery library. -->
-    <script src="js/jquery-1.11.3.min.js" type="text/javascript" data-library="jquery" data-version="1.11.3"></script>
-    <script src="js/jssor.slider-22.1.5.mini.js" type="text/javascript" data-library="jssor.slider.mini" data-version="22.1.5"></script>
     <script type="text/javascript">
         jQuery(document).ready(function ($) {
 
@@ -122,14 +116,13 @@
         </div>
         <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:1300px;height:500px;overflow:hidden;">
             <div data-p="225.00">
-                <img data-u="image" src="img/red.jpg" />
-
+                <img data-u="image" src="img/purple.png" />
             </div>
             <div data-p="225.00">
-                <img data-u="image" src="img/purple.jpg" />
+                <img data-u="image" src="img/red.png" />
             </div>
             <div data-p="225.00">
-                <img data-u="image" src="img/blue.jpg" />
+                <img data-u="image" src="img/blue.png" />
             </div>
         </div>
         <!-- Bullet Navigator -->
@@ -142,24 +135,20 @@
         <span data-u="arrowright" class="jssora22r" style="top:0px;right:8px;width:40px;height:58px;" data-autocenter="2"></span>
     </div>
     <div class="col-md-6 accordions">
-						    <section class="ac-container">
-									<div>
-										<label onclick="createBusiExpMain();">Business Expense</label>
-									</div>
-									<div id="CategoryTrRoleID">
-										<label  onclick="createTravelMain();" style="background: #8fae51 url(images/ar-n.png) no-repeat right;" for="ac-2">Travel Management</label>
-
-									</div>
-									<div>
-										<label onclick="createWallet();" style="background: #8775a7 url(images/ar-n.png) no-repeat right;" for="ac-3">My Receipts Wallet</label>
-									</div>
-								</section>
-
-
+         <section class="ac-container">
+               <div>
+				<label onclick="createBusiExpMain();">Business Expense</label>
+				</div>
+				<div id="CategoryTrRoleID">
+				<label  onclick="createTravelMain();" style="background: #8fae51 url(images/ar-n.png) no-repeat right;" for="ac-2">Travel Management</label>
+                </div>
+				<div>
+               <label onclick="createWallet();" style="background: #8775a7 url(images/ar-n.png) no-repeat right;" for="ac-3">My Receipts Wallet</label>
+				</div>
+         </section>
     </div>
     <!-- #endregion Jssor Slider End -->
-    
-    <center><a><p style="color: #19CFEF;font: caption;" onclick="showHelpMenu()"> <b>Help</b></p></a></center>
+    <center><a><p style="color: #19CFEF;font: caption;"> <b onclick="showHelpMenu()">Help</b></p></a></center>
 </body>    
 
 

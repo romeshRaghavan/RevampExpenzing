@@ -47,7 +47,7 @@ body  h1 {
 /*--- Navigation---*/
 .nav {
 	float: left;
-	width: 6%;
+	width: 100%;
 }
 .main-content {
     padding-top:3em;
@@ -623,7 +623,7 @@ color:#ffffff;
 .sap_tabs p {
     font-size: 1em;
     color: #3b4b5c;
-    line-height: 1.9em;
+    line-height: 1.2em;
 	padding: 1.55em 2em;
    font-weight:400;
 }
@@ -1043,7 +1043,7 @@ li.com a:hover{
 }
 
 .ac-container label{
-    padding: 10px 20px;
+    padding: 10px 8px;
     position: relative;
     z-index: 20;
     display: block;
@@ -1122,10 +1122,10 @@ li.com a:hover{
 	box-shadow: 0px 0px 0px 1px rgba(155,155,155,0.3);
 }
 .ac-container input:checked ~ article.ac-small{
-	height: 140px;
+	height: 380px;
 }
 .ac-container input:checked ~ article.ac-medium{
-	height: 180px;
+	height: 630px;
 }
 .ac-container input:checked ~ article.ac-large{
 	height: 230px;
@@ -2095,7 +2095,7 @@ a.hvr-hollow:hover,a.hvr-hollow:focus,a.hvr-hollow:active {
 	}
 	.sap_tabs p {
 		font-size: 0.9em;
-		padding: 1em 1em;
+		padding: 0em 0em;
 	}
 	.resp-tab-item {
 		color: #193042;

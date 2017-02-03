@@ -298,7 +298,8 @@ function saveBusinessExpDetails(jsonBEArr,busExpDetailsArr){
 	 jsonToSaveBE["ProcessStatus"] = "0";
 	 jsonToSaveBE["expenseDetails"] = jsonBEArr;
 	 requestRunning = true;
-	 var pageRef=defaultPagePath+'success.html';
+	 var pageRefSuccess=defaultPagePath+'success.html';
+     var pageRefFailure=defaultPagePath+'failure.html';
 	 j('#loading_Cat').show();
 	 j.ajax({
 				  url: window.localStorage.getItem("urlPath")+"BusExpService",
@@ -315,18 +316,18 @@ function saveBusinessExpDetails(jsonBEArr,busExpDetailsArr){
 						 }
 						 requestRunning = false;
 						 j('#mainHeader').load(headerBackBtn);
-						 j('#mainContainer').load(pageRef);
+						 j('#mainContainer').load(pageRefSuccess);
 						 //appPageHistory.push(pageRef);
 					 }else if(data.Status=="Error"){
 					 	requestRunning = false;
 					 	successMessage = "Oops!! Something went wrong. Please contact system administrator";
 						j('#mainHeader').load(headerBackBtn);
-					 	j('#mainContainer').load(pageRef);
+					 	j('#mainContainer').load(pageRefFailure);
 					 }else{
 					 	requestRunning = false;
 					 	successMessage = "Error in synching expenses. Please contact system administrator";
 						j('#mainHeader').load(headerBackBtn);
-					 	j('#mainContainer').load(pageRef);
+					 	j('#mainContainer').load(pageRefFailure);
 					 } 
 				  },
 				  error:function(data) {
@@ -343,7 +344,8 @@ function saveTravelSettleExpDetails(jsonTSArr,tsExpDetailsArr){
 	 jsonToSaveTS["employeeId"] = window.localStorage.getItem("EmployeeId");
 	 jsonToSaveTS["expenseDetails"] = jsonTSArr;
 	 requestRunning = true;
-	 var pageRef=defaultPagePath+'success.html';
+     var pageRefSuccess=defaultPagePath+'success.html';
+     var pageRefFailure=defaultPagePath+'failure.html';
 	j.ajax({
 				  url: window.localStorage.getItem("urlPath")+"SyncSettlementExpensesWebService",
 				  type: 'POST',
@@ -359,17 +361,17 @@ function saveTravelSettleExpDetails(jsonTSArr,tsExpDetailsArr){
 					 }
 					 requestRunning = false;
 					 j('#mainHeader').load(headerBackBtn);
-					 j('#mainContainer').load(pageRef);
+					 j('#mainContainer').load(pageRefSuccess);
 					 }else if(data.Status=="Error"){
 					 	requestRunning = false;
 						successMessage = "Oops!! Something went wrong. Please contact system administrator.";
 						j('#mainHeader').load(headerBackBtn);
-					 	j('#mainContainer').load(pageRef);
+					 	j('#mainContainer').load(pageRefFailure);
 					 }else{
 					 	requestRunning = false;
 						successMessage = "Error in synching expenses. Please contact system administrator.";
 						j('#mainHeader').load(headerBackBtn);
-					 	j('#mainContainer').load(pageRef);
+					 	j('#mainContainer').load(pageRefFailure);
 					 }
 				  },
 				  error:function(data) {
@@ -391,12 +393,13 @@ function sendForApprovalBusinessDetails(jsonBEArr,busExpDetailsArr,accountHeadID
 	 jsonToSaveBE["ProcessStatus"] = "1";
 	 jsonToSaveBE["title"]= window.localStorage.getItem("FirstName")+"/"+jsonToSaveBE["startDate"]+" to "+jsonToSaveBE["endDate"];
 	
-	 var pageRef=defaultPagePath+'success.html';
-	 callSendForApprovalServiceForBE(jsonToSaveBE,busExpDetailsArr,pageRef);
+     var pageRefSuccess=defaultPagePath+'success.html';
+     var pageRefFailure=defaultPagePath+'failure.html';
+	 callSendForApprovalServiceForBE(jsonToSaveBE,busExpDetailsArr,pageRefSuccess,pageRefFailure);
 	 
 }
 
-function callSendForApprovalServiceForBE(jsonToSaveBE,busExpDetailsArr,pageRef){
+function callSendForApprovalServiceForBE(jsonToSaveBE,busExpDetailsArr,pageRefSuccess,pageRefFailure){
 j('#loading_Cat').show();
 var headerBackBtn=defaultPagePath+'backbtnPage.html';
 j.ajax({
@@ -419,7 +422,7 @@ j.ajax({
 						 requestRunning = false;
 						 j('#loading_Cat').hide();
 						 j('#mainHeader').load(headerBackBtn);
-						 j('#mainContainer').load(pageRef);
+						 j('#mainContainer').load(pageRefSuccess);
 						// appPageHistory.push(pageRef);
 						}
 					}else if(data.Status=="Failure"){
@@ -427,12 +430,12 @@ j.ajax({
 						requestRunning = false;
 					 	j('#loading_Cat').hide();
 						j('#mainHeader').load(headerBackBtn);
-					 	j('#mainContainer').load(pageRef);
+					 	j('#mainContainer').load(pageRefFailure);
 					 }else{
 						 j('#loading_Cat').hide();
 						successMessage = "Oops!! Something went wrong. Please contact system administrator.";
 						j('#mainHeader').load(headerBackBtn);
-					 	j('#mainContainer').load(pageRef);
+					 	j('#mainContainer').load(pageRefFailure);
 					 }
 					},
 				  error:function(data) {
@@ -589,7 +592,19 @@ function createTravelModeDown(jsonTrvlModeArr){
 				return result.name;
 		}
 	});
+    
+    	j("#travelModeForTS").select2({
+		data:{ results: jsonArr, text: 'name' },
+		placeholder: "Travel Mode",
+		minimumResultsForSearch: -1,
+		formatResult: function(result) {
+			if ( ! isJsonString(result.id))
+				result.id = JSON.stringify(result.id);
+				return result.name;
+		}
+	});
 } 
+
 
 function createCategoryDropDown(jsonCategoryArr){
 	var jsonArr = [];
@@ -622,7 +637,19 @@ function createCategoryDropDown(jsonCategoryArr){
 				return result.name;
 		}
 	});
-} 
+    
+    	j("#travelCategoryForTS").select2({
+		data:{ results: jsonArr, text: 'name' },
+		placeholder: "Travel Category",
+		minimumResultsForSearch: -1,
+		formatResult: function(result) {
+			if ( ! isJsonString(result.id))
+				result.id = JSON.stringify(result.id);
+				return result.name;
+		}
+	});
+}
+
 
 function createCitytownDropDown(jsonCityTownArr){
 	var jsonArr = [];
@@ -655,7 +682,20 @@ function createCitytownDropDown(jsonCityTownArr){
 				return result.name;
 		}
 	});
+    
+    
+    	j("#Citytown").select2({
+		data:{ results: jsonArr, text: 'name' },
+		placeholder: "From Location",
+		minimumResultsForSearch: 2,
+		formatResult: function(result) {
+			if ( ! isJsonString(result.id))
+				result.id = JSON.stringify(result.id);
+				return result.name;
+		}
+	});
 } 
+
 
 function createTravelTypeDropDown(jsonTravelTypeArr){
 	var jsonArr = [];
@@ -929,7 +969,8 @@ function syncSubmitTravelDetails(){
 }
 
 function saveTravelRequestAjax(jsonToSaveTR){
-	var pageRef=defaultPagePath+'success.html';
+	 var pageRefSuccess=defaultPagePath+'success.html';
+     var pageRefFailure=defaultPagePath+'failure.html';
     j('#loading_Cat').show();    
 	 j.ajax({
 			  url: window.localStorage.getItem("urlPath")+"SyncTravelRequestDetail",
@@ -949,20 +990,20 @@ function saveTravelRequestAjax(jsonToSaveTR){
 				  }else if(data.Status=="Success"){
 					  successMessage = data.Message;
 						j('#loading_Cat').hide();
-						j('#mainContainer').load(pageRef);
-						appPageHistory.push(pageRef);
+						j('#mainContainer').load(pageRefSuccess);
+						appPageHistory.push(pageRefSuccess);
 				  }else{
 					 successMessage = "Error: Oops something is wrong, Please Contact System Administer";
 					  j('#loading_Cat').hide();
-					  j('#mainContainer').load(pageRef);
-					   appPageHistory.push(pageRef);
+					  j('#mainContainer').load(pageRefFailure);
+					   appPageHistory.push(pageRefFailure);
 				  }
 				},
 			  error:function(data) {
 				successMessage = "Error: Oops something is wrong, Please Contact System Administer";
 					  j('#loading_Cat').hide();
-					  j('#mainContainer').load(pageRef);
-					  appPageHistory.push(pageRef);
+					  j('#mainContainer').load(pageRefFailure);
+					  appPageHistory.push(pageRefFailure);
 			  }
 	});
 }
@@ -1230,6 +1271,12 @@ function onloadTimePicker(){
      getCategoryFromDB(modeID);
  }
 
+  function getCatergoryBasedOnModeForTS(){
+
+ 	var modeID = j("#travelModeForTS").select2('data').id;
+     getCategoryFromDB(modeID);
+ }
+
   function getRoundCatergoryBasedOnMode(){
 
 	 	var modeID = j("#roundTripMode").select2('data').id;
@@ -1449,7 +1496,8 @@ function validateNumericField(obj){
 }
 
 function setDelayMessage(returnJsonData,jsonToBeSend,busExpDetailsArr){
-		var pageRef=defaultPagePath+'success.html';
+     var pageRefSuccess=defaultPagePath+'success.html';
+     var pageRefFailure=defaultPagePath+'failure.html';
 		if(returnJsonData.DelayStatus=='Y'){
 			exceptionMessage = "This voucher has exceeded Time Limit.";
 			
@@ -1462,12 +1510,11 @@ function setDelayMessage(returnJsonData,jsonToBeSend,busExpDetailsArr){
 						return false;
 					}
 			 jsonToBeSend["DelayAllowCheck"]=true;
-			 callSendForApprovalServiceForBE(jsonToBeSend,busExpDetailsArr,pageRef);
+			 callSendForApprovalServiceForBE(jsonToBeSend,busExpDetailsArr,pageRefSuccess,pageRefFailure);
 		}			
 }
 
 function setTREntitlementExceedMessage(returnJsonData,jsonToBeSend){
-		var pageRef=defaultPagePath+'success.html';
 		var msg=returnJsonData.Message+".\nThis voucher has exceeded Entitlements. Do you want to proceed?";
 	navigator.notification.confirm(msg,
 		function(buttonIndex){
@@ -2430,7 +2477,8 @@ function syncSubmitEmpAdvance(){
 
 function saveEmployeeAdvanceAjax(jsonToSaveEA){
     var headerBackBtn=defaultPagePath+'backbtnPage.html';
-	var pageRef=defaultPagePath+'success.html';
+     var pageRefSuccess=defaultPagePath+'success.html';
+     var pageRefFailure=defaultPagePath+'failure.html';
 	 j.ajax({
 			  url: window.localStorage.getItem("urlPath")+"SyncSubmitEmployeeAdvanceDetail",
 			  type: 'POST',
@@ -2443,19 +2491,19 @@ function saveEmployeeAdvanceAjax(jsonToSaveEA){
 						requestRunning = false;
 					 	j('#loading_Cat').hide();
 						j('#mainHeader').load(headerBackBtn);
-					 	j('#mainContainer').load(pageRef);
+					 	j('#mainContainer').load(pageRefSuccess);
 						
 					}else if(data.Status=="Failure"){
 					 	successMessage = data.Message;
 						requestRunning = false;
 					 	j('#loading_Cat').hide();
 						j('#mainHeader').load(headerBackBtn);
-					 	j('#mainContainer').load(pageRef);
+					 	j('#mainContainer').load(pageRefFailure);
 					 }else{
 						 j('#loading_Cat').hide();
 						successMessage = "Oops!! Something went wrong. Please contact system administrator.";
 						j('#mainHeader').load(headerBackBtn);
-					 	j('#mainContainer').load(pageRef);
+					 	j('#mainContainer').load(pageRefFailure);
 					 }
 					},
 				  error:function(data) {
@@ -2768,12 +2816,13 @@ function sendForApprovalBusinessDetailsWithEa(jsonBEArr,jsonEAArr,busExpDetailsA
 	 jsonToSaveBE["ProcessStatus"] = "1";
 	 jsonToSaveBE["title"]= window.localStorage.getItem("FirstName")+"/"+jsonToSaveBE["startDate"]+" to "+jsonToSaveBE["endDate"];
 	
-	 var pageRef=defaultPagePath+'success.html';
-	 callSendForApprovalServiceForBEwithEA(jsonToSaveBE,busExpDetailsArr,empAdvArr,pageRef);
+     var pageRefSuccess=defaultPagePath+'success.html';
+     var pageRefFailure=defaultPagePath+'failure.html';
+	 callSendForApprovalServiceForBEwithEA(jsonToSaveBE,busExpDetailsArr,empAdvArr,pageRefSuccess,pageRefFailure);
 	 
 }
 
-function callSendForApprovalServiceForBEwithEA(jsonToSaveBE,busExpDetailsArr,empAdvArr,pageRef){
+function callSendForApprovalServiceForBEwithEA(jsonToSaveBE,busExpDetailsArr,empAdvArr,pageRefSuccess,pageRefFailure){
 j('#loading_Cat').show();
 var headerBackBtn=defaultPagePath+'backbtnPage.html';
 j.ajax({
@@ -2800,7 +2849,7 @@ j.ajax({
 						 requestRunning = false;
 						 j('#loading_Cat').hide();
 						 j('#mainHeader').load(headerBackBtn);
-						 j('#mainContainer').load(pageRef);
+						 j('#mainContainer').load(pageRefSuccess);
 						// appPageHistory.push(pageRef);
 						}
 					}else if(data.Status=="Failure"){
@@ -2808,12 +2857,12 @@ j.ajax({
 						requestRunning = false;
 					 	j('#loading_Cat').hide();
 						j('#mainHeader').load(headerBackBtn);
-					 	j('#mainContainer').load(pageRef);
+					 	j('#mainContainer').load(pageRefFailure);
 					 }else{
 						 j('#loading_Cat').hide();
 						successMessage = "Oops!! Something went wrong. Please contact system administrator.";
 						j('#mainHeader').load(headerBackBtn);
-					 	j('#mainContainer').load(pageRef);
+					 	j('#mainContainer').load(pageRefFailure);
 					 }
 					},
 				  error:function(data) {
@@ -2825,7 +2874,7 @@ j.ajax({
 }
 
 function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("mySidenav").style.width = "230px";
 }
 
 function closeNav() {
@@ -2875,3 +2924,8 @@ function fetchBusiEmpAdv(){
       appPageHistory.push(pageRef);
 	 }
 
+function onloadDefaultValue(){
+    clickedFlagCar = false;
+    clickedFlagTicket = false;
+    clickedFlagHotel = false;
+}

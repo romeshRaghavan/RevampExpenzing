@@ -302,21 +302,21 @@ function saveTravelSettleDetails(status){
 		}else{
 			currency_id = '-1';
 		}
-		if(j("#travelMode").select2('data') != null){
-			travelMode_id = j("#travelMode").select2('data').id;
-			travelMode_val = j("#travelMode").select2('data').name;
+		if(j("#travelModeForTS").select2('data') != null){
+			travelMode_id = j("#travelModeForTS").select2('data').id;
+			travelMode_val = j("#travelModeForTS").select2('data').name;
 		}else{
 			travelMode_id = '-1';
 		}
-		if(j("#travelCategory").select2('data') != null){
-			travelCategory_id = j("#travelCategory").select2('data').id;
-			travelCategory_val = j("#travelCategory").select2('data').name;
+		if(j("#travelCategoryForTS").select2('data') != null){
+			travelCategory_id = j("#travelCategoryForTS").select2('data').id;
+			travelCategory_val = j("#travelCategoryForTS").select2('data').name;
 		}else{
 			travelCategory_id = '-1';
 		}
-		if(j("#fromCitytown").select2('data') != null){
-			cityTown_id = j("#fromCitytown").select2('data').id;
-			cityTown_val = j("#fromCitytown").select2('data').name;
+		if(j("#Citytown").select2('data') != null){
+			cityTown_id = j("#Citytown").select2('data').id;
+			cityTown_val = j("#Citytown").select2('data').name;
 		}else{
 			cityTown_id = '-1';
 		}	
@@ -349,9 +349,9 @@ function saveTravelSettleDetails(status){
 					document.getElementById('expAmt').value = "";
 					j('#travelRequestName').select2('data', '');
 					j('#travelExpenseName').select2('data', '');
-					j('#travelMode').select2('data', '');
-					j('#travelCategory').select2('data', '');
-					j('#fromCitytown').select2('data', '');
+					j('#travelModeForTS').select2('data', '');
+					j('#travelCategoryForTS').select2('data', '');
+					j('#Citytown').select2('data', '');
 					j("label[for='startDate']").html("");
 					j("label[for='endDate']").html("");
 					smallImageTS.style.display = 'none';
@@ -1047,7 +1047,7 @@ function fetchTravelModeList(transaction, results) {
 		
 		jsonTrvlModeArr.push(jsonFindMode);
 	}
-	createTravelModeDown(jsonTrvlModeArr)
+	createTravelModeDown(jsonTrvlModeArr);
 }
 
 function fetchTrvlCategoryList(transaction, results) {
@@ -1062,7 +1062,7 @@ function fetchTrvlCategoryList(transaction, results) {
 		
 		jsonCategoryArr.push(jsonFindCategory);
 	}
-	createCategoryDropDown(jsonCategoryArr)
+	createCategoryDropDown(jsonCategoryArr);
 }
 
 function fetchCityTownList(transaction, results) {
@@ -1077,7 +1077,7 @@ function fetchCityTownList(transaction, results) {
 		
 		jsonCityTownArr.push(jsonFindCityTown);
 	}
-	createCitytownDropDown(jsonCityTownArr)
+	createCitytownDropDown(jsonCityTownArr);
 }
 
 function fetchTrvlTypeList(transaction, results) {
@@ -2124,4 +2124,84 @@ function fetchExpenseClaimFromMain() {
 		 });
 	 });	 
 	 mytable.appendTo("#box");		 
+ }
+
+function fetchTravelSettlementExpFromMain() {
+	j('#source').remove();
+	mytable = j('<table></table>').attr({ id: "source",class: ["table","table-striped","table-bordered"].join(' ') });
+	
+	var rowThead = j("<thead></thead>").appendTo(mytable);
+	var rowTh = j('<tr></tr>').attr({ class: ["test"].join(' ') }).appendTo(rowThead);
+	
+	j('<th></th>').text("Date").appendTo(rowTh);
+	j('<th></th>').text("Expense Name").appendTo(rowTh);
+	j('<th></th>').text("Amt").appendTo(rowTh);
+	j('<th></th>').text("cityTown").appendTo(rowTh);
+	j('<th></th>').text("Narration").appendTo(rowTh);
+	
+	
+	var cols = new Number(4);
+	 
+	mydb.transaction(function(t) {
+		
+      t.executeSql('select * from travelSettleExpDetails inner join cityTownMst on cityTownMst.cityTownId = travelSettleExpDetails.cityTownId inner join currencyMst on travelSettleExpDetails.currencyId = currencyMst.currencyId inner join travelExpenseNameMst on travelExpenseNameMst.id = travelSettleExpDetails.expNameId;', [],
+		 function(transaction, result) {
+		 	
+		  if (result != null && result.rows != null) {
+			  
+			for (var i = 0; i < result.rows.length; i++) {
+				
+			  var row = result.rows.item(i);
+			  
+			  var newDateFormat = reverseConvertDate(row.expDate.substring(0,2))+"-"+row.expDate.substring(3,5)+" "+row.expDate.substring(6,10);	  
+			  
+			  var rowss = j('<tr></tr>').attr({ class: ["test"].join(' ') }).appendTo(mytable);
+		
+		        j('<td></td>').attr({ class: ["expDate"].join(' ') }).text(newDateFormat).appendTo(rowss);				
+				j('<td></td>').attr({ class: ["expenseName"].join(' ') }).text(row.expenseName).appendTo(rowss);
+				j('<td></td>').attr({ class: ["expAmt"].join(' ') }).html('<p>'+row.expAmt+' '+row.currencyName+'</P>').appendTo(rowss);
+				j('<td></td>').attr({ class: ["cityTownName"].join(' ') }).text(row.cityTownName).appendTo(rowss);
+				
+				if(row.tsExpAttachment.length == 0){
+				j('<td></td>').attr({ class: ["expNarration"].join(' ') }).html('<p>'+row.expNarration+'</P>').appendTo(rowss); 	
+				}else{
+				j('<td></td>').attr({ class: ["expNarration"].join(' ') }).html('<p>'+row.expNarration+'</P><img src="images/attach.png" width="25px" height="25px">').appendTo(rowss); 
+				}
+				j('<td></td>').attr({ class: ["expDate1","displayNone"].join(' ') }).text(row.expDate).appendTo(rowss);
+				j('<td></td>').attr({ class: ["expAmt1","displayNone"].join(' ') }).text(row.expAmt).appendTo(rowss);
+				j('<td></td>').attr({ class: ["expNarration1","displayNone"].join(' ') }).text(row.expNarration).appendTo(rowss);
+				j('<td></td>').attr({ class: ["travelRequestId","displayNone"].join(' ') }).text(row.travelRequestId).appendTo(rowss);
+				j('<td></td>').attr({ class: ["tsExpAttachment","displayNone"].join(' ') }).text(row.tsExpAttachment).appendTo(rowss);				
+				j('<td></td>').attr({ class: ["expNameId","displayNone"].join(' ') }).text(row.expenseNameId).appendTo(rowss); 				
+				j('<td></td>').attr({ class: ["expUnit","displayNone"].join(' ') }).text(row.expUnit).appendTo(rowss); 				
+				j('<td></td>').attr({ class: ["currencyId","displayNone"].join(' ') }).text(row.currencyId).appendTo(rowss);
+				j('<td></td>').attr({ class: ["modeId","displayNone"].join(' ') }).text(row.travelModeId).appendTo(rowss); 				
+				j('<td></td>').attr({ class: ["categoryId","displayNone"].join(' ') }).text(row.travelCategoryId).appendTo(rowss); 				
+				j('<td></td>').attr({ class: ["fromcityTownId","displayNone"].join(' ') }).text(row.cityTownId).appendTo(rowss); 				 				
+				j('<td></td>').attr({ class: ["accountCodeId","displayNone"].join(' ') }).text(row.accCodeId).appendTo(rowss);		
+				j('<td></td>').attr({ class: ["expName","displayNone"].join(' ') }).text(row.expenseName).appendTo(rowss);		
+				j('<td></td>').attr({ class: ["tsExpId","displayNone"].join(' ') }).text(row.tsExpId).appendTo(rowss);
+				j('<td></td>').attr({ class: ["isModeCategory","displayNone"].join(' ') }).text(row.isModeCategory).appendTo(rowss);
+				j('<td></td>').attr({ class: ["accountCodeId","displayNone"].join(' ') }).text(row.accountCodeId).appendTo(rowss);				
+			}	
+					
+			j("#source tr").click(function(){
+				headerOprationBtn = defaultPagePath+'headerPageForTSOperation.html';
+				if(j(this).hasClass("selected")){ 
+				var headerBackBtn=defaultPagePath+'headerPageForTSOperation.html';
+					j(this).removeClass('selected');
+					j('#mainHeader').load(headerBackBtn);
+				}else{
+					if(j(this).text()=='DateExpense NameAmtcityTownNarration'){
+						
+					}else{
+					j('#mainHeader').load(headerOprationBtn);
+					j(this).addClass('selected');
+					}
+				}								
+			});
+			}
+		 });
+	 });	 
+	 mytable.appendTo("#box");	 
  }
