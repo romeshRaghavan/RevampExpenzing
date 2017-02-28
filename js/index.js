@@ -2450,7 +2450,7 @@ function syncSubmitEmpAdvance(){
 		empAccHead_id = j("#empAdvAccHead").select2('data').id;
 		empAccHead_Name = j("#empAdvAccHead").select2('data').name;
 	}else{
-		from_id = '-1';
+		empAccHead_id = '-1';
 	}	
 	
 
